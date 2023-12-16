@@ -9,21 +9,23 @@
 # Date Perform: December 10, 2023
 # Date Submitted: December 11, 2023
 import streamlit as st
+import subprocess
+
+# Check if TensorFlow is installed, if not, install it
+try:
+    import tensorflow as tf
+except ImportError:
+    st.sidebar.text("Installing TensorFlow...")
+    subprocess.run(["pip", "install", "tensorflow"])
+
+# Continue with the rest of your imports
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 from PIL import Image
 import cv2
 import numpy as np
-import subprocess
 
-# Check if OpenCV is installed, if not, install it
-try:
-    import cv2
-except ImportError:
-    st.sidebar.text("Installing OpenCV...")
-    subprocess.run(["pip", "install", "opencv-python"])
-
-# Continue with the rest of your imports and script
+# Continue with the rest of your script
 model_path = '/best_model.h5'
 model = load_model(model_path)
 
