@@ -14,12 +14,16 @@ from tensorflow.keras.preprocessing import image
 from PIL import Image
 import cv2
 import numpy as np
+import subprocess
 
-# Add the installation of OpenCV at the top of your app.py script
-st.sidebar.text("Installing OpenCV...")
-st.sidebar.code("pip install opencv-python")
-!pip install opencv-python
+# Check if OpenCV is installed, if not, install it
+try:
+    import cv2
+except ImportError:
+    st.sidebar.text("Installing OpenCV...")
+    subprocess.run(["pip", "install", "opencv-python"])
 
+# Continue with the rest of your imports and script
 model_path = '/best_model.h5'
 model = load_model(model_path)
 
