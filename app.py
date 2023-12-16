@@ -9,8 +9,16 @@
 # Date Perform: December 10, 2023
 # Date Submitted: December 11, 2023
 import streamlit as st
+from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing import image
+from PIL import Image
 import cv2
 import numpy as np
+
+# Add the installation of OpenCV at the top of your app.py script
+st.sidebar.text("Installing OpenCV...")
+st.sidebar.code("pip install opencv-python")
+!pip install opencv-python
 
 model_path = '/best_model.h5'
 model = load_model(model_path)
@@ -20,7 +28,6 @@ st.title("Emtech2 - Emotion Prediction App")
 uploaded_file = st.file_uploader("Choose an image...", type="jpg")
 
 if uploaded_file is not None:
-
     img = Image.open(uploaded_file)
     img = img.resize((64, 64))
     img_array = image.img_to_array(img)
