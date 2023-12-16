@@ -10,11 +10,6 @@
 # Date Submitted: December 11, 2023
 import streamlit as st
 import subprocess
-import cv2
-import numpy as np
-from tensorflow.keras.models import load_model
-from tensorflow.keras.preprocessing import image
-from PIL import Image
 
 # Check if TensorFlow is installed, if not, install it
 try:
@@ -24,6 +19,13 @@ except ImportError:
     subprocess.run(["pip", "install", "tensorflow"])
 
 # Continue with the rest of your imports
+from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing import image
+from PIL import Image
+import cv2
+import numpy as np
+
+# Continue with the rest of your script
 model_path = '/best_model.h5'
 model = load_model(model_path)
 
@@ -44,16 +46,4 @@ if uploaded_file is not None:
     confidence = prediction[0] if predicted_class == "Happy" else 1 - prediction[0]
     confidence_scalar = float(confidence)
 
-    st.image(img, caption=f'Predicted Emotion: {predicted_class} (Confidence: {confidence_scalar:.2f})', use_column_width=True)
-
-    st.write("")
-
-    # Additional content related to "Happy" or "Sad"
-    if predicted_class == "Happy":
-        st.write("It looks like a happy moment!")
-        # Add more content or actions for happy images
-    else:
-        st.write("Seems like a sad moment.")
-        # Add more content or actions for sad images
-
-    # Continue with any other content or functionality you want to include
+    st.image(img, caption=f'Predicted Class: {predicted_class} (Confidence: {confidence_scalar:.2f})', use_column_width=True)
